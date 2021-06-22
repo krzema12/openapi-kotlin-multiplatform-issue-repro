@@ -16,27 +16,21 @@ import org.openapitools.client.models.Pet
 
 import org.openapitools.client.infrastructure.*
 import io.ktor.client.request.forms.formData
-import kotlinx.serialization.UnstableDefault
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import io.ktor.http.ParametersBuilder
 import kotlinx.serialization.*
-import kotlinx.serialization.internal.StringDescriptor
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
-class PetApi @UseExperimental(UnstableDefault::class) constructor(
+class PetApi constructor(
     baseUrl: kotlin.String = "https://petstore.swagger.io/v2",
     httpClientEngine: HttpClientEngine? = null,
-    serializer: KotlinxSerializer
+    serializer: KotlinxSerializer = KotlinxSerializer()
 ) : ApiClient(baseUrl, httpClientEngine, serializer) {
-
-    @UseExperimental(UnstableDefault::class)
-    constructor(
-        baseUrl: kotlin.String = "https://petstore.swagger.io/v2",
-        httpClientEngine: HttpClientEngine? = null,
-        jsonConfiguration: JsonConfiguration = JsonConfiguration.Default
-    ) : this(baseUrl, httpClientEngine, KotlinxSerializer(Json(jsonConfiguration)))
 
     /**
      * Add a new pet to the store
@@ -141,12 +135,13 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
     private class FindPetsByStatusResponse(val value: List<Pet>) {
         @Serializer(FindPetsByStatusResponse::class)
         companion object : KSerializer<FindPetsByStatusResponse> {
-            private val serializer: KSerializer<List<Pet>> = Pet.serializer().list
-                override val descriptor = StringDescriptor.withName("FindPetsByStatusResponse")
-                override fun serialize(encoder: Encoder, obj: FindPetsByStatusResponse) = serializer.serialize(encoder, obj.value)
-                override fun deserialize(decoder: Decoder) = FindPetsByStatusResponse(serializer.deserialize(decoder))
+            private val serializer: KSerializer<List<Pet>> = ListSerializer(Pet.serializer())
+            override val descriptor = PrimitiveSerialDescriptor("FindPetsByStatusResponse", PrimitiveKind.STRING)
+            override fun serialize(encoder: Encoder, obj: FindPetsByStatusResponse) = serializer.serialize(encoder, obj.value)
+            override fun deserialize(decoder: Decoder) = FindPetsByStatusResponse(serializer.deserialize(decoder))
         }
     }
+
 
     /**
      * Finds Pets by tags
@@ -185,12 +180,13 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
     private class FindPetsByTagsResponse(val value: List<Pet>) {
         @Serializer(FindPetsByTagsResponse::class)
         companion object : KSerializer<FindPetsByTagsResponse> {
-            private val serializer: KSerializer<List<Pet>> = Pet.serializer().list
-                override val descriptor = StringDescriptor.withName("FindPetsByTagsResponse")
-                override fun serialize(encoder: Encoder, obj: FindPetsByTagsResponse) = serializer.serialize(encoder, obj.value)
-                override fun deserialize(decoder: Decoder) = FindPetsByTagsResponse(serializer.deserialize(decoder))
+            private val serializer: KSerializer<List<Pet>> = ListSerializer(Pet.serializer())
+            override val descriptor = PrimitiveSerialDescriptor("FindPetsByTagsResponse", PrimitiveKind.STRING)
+            override fun serialize(encoder: Encoder, obj: FindPetsByTagsResponse) = serializer.serialize(encoder, obj.value)
+            override fun deserialize(decoder: Decoder) = FindPetsByTagsResponse(serializer.deserialize(decoder))
         }
     }
+
 
     /**
      * Find pet by ID
@@ -329,16 +325,5 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
             localVariableBody,
             localVariableAuthNames
         ).wrap()
-    }
-
-
-
-    companion object {
-        internal fun setMappers(serializer: KotlinxSerializer) {
-
-            serializer.setMapper(FindPetsByStatusResponse::class, FindPetsByStatusResponse.serializer())
-            serializer.setMapper(FindPetsByTagsResponse::class, FindPetsByTagsResponse.serializer())
-
-        }
     }
 }

@@ -14,28 +14,20 @@ package org.openapitools.client.apis
 import org.openapitools.client.models.User
 
 import org.openapitools.client.infrastructure.*
-import io.ktor.client.request.forms.formData
-import kotlinx.serialization.UnstableDefault
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
-import io.ktor.http.ParametersBuilder
 import kotlinx.serialization.*
-import kotlinx.serialization.internal.StringDescriptor
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
-class UserApi @UseExperimental(UnstableDefault::class) constructor(
+class UserApi constructor(
     baseUrl: kotlin.String = "https://petstore.swagger.io/v2",
     httpClientEngine: HttpClientEngine? = null,
-    serializer: KotlinxSerializer
+    serializer: KotlinxSerializer = KotlinxSerializer()
 ) : ApiClient(baseUrl, httpClientEngine, serializer) {
-
-    @UseExperimental(UnstableDefault::class)
-    constructor(
-        baseUrl: kotlin.String = "https://petstore.swagger.io/v2",
-        httpClientEngine: HttpClientEngine? = null,
-        jsonConfiguration: JsonConfiguration = JsonConfiguration.Default
-    ) : this(baseUrl, httpClientEngine, KotlinxSerializer(Json(jsonConfiguration)))
 
     /**
      * Create user
@@ -103,8 +95,8 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
     private class CreateUsersWithArrayInputRequest(val value: List<User>) {
         @Serializer(CreateUsersWithArrayInputRequest::class)
         companion object : KSerializer<CreateUsersWithArrayInputRequest> {
-            private val serializer: KSerializer<List<User>> = User.serializer().list
-                override val descriptor = StringDescriptor.withName("CreateUsersWithArrayInputRequest")
+            private val serializer: KSerializer<List<User>> = ListSerializer(User.serializer())
+                override val descriptor = PrimitiveSerialDescriptor("CreateUsersWithArrayInputRequest", PrimitiveKind.STRING)
                 override fun serialize(encoder: Encoder, obj: CreateUsersWithArrayInputRequest) = serializer.serialize(encoder, obj.value)
                 override fun deserialize(decoder: Decoder) = CreateUsersWithArrayInputRequest(serializer.deserialize(decoder))
         }
@@ -144,8 +136,8 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
     private class CreateUsersWithListInputRequest(val value: List<User>) {
         @Serializer(CreateUsersWithListInputRequest::class)
         companion object : KSerializer<CreateUsersWithListInputRequest> {
-            private val serializer: KSerializer<List<User>> = User.serializer().list
-                override val descriptor = StringDescriptor.withName("CreateUsersWithListInputRequest")
+            private val serializer: KSerializer<List<User>> = ListSerializer(User.serializer())
+                override val descriptor = PrimitiveSerialDescriptor("CreateUsersWithListInputRequest", PrimitiveKind.STRING)
                 override fun serialize(encoder: Encoder, obj: CreateUsersWithListInputRequest) = serializer.serialize(encoder, obj.value)
                 override fun deserialize(decoder: Decoder) = CreateUsersWithListInputRequest(serializer.deserialize(decoder))
         }
@@ -312,17 +304,5 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
             localVariableBody,
             localVariableAuthNames
         ).wrap()
-    }
-
-
-
-
-    companion object {
-        internal fun setMappers(serializer: KotlinxSerializer) {
-
-            serializer.setMapper(CreateUsersWithArrayInputRequest::class, CreateUsersWithArrayInputRequest.serializer())
-            serializer.setMapper(CreateUsersWithListInputRequest::class, CreateUsersWithListInputRequest.serializer())
-
-        }
     }
 }

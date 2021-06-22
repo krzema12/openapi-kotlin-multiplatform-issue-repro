@@ -15,7 +15,6 @@ import org.openapitools.client.models.Category
 import org.openapitools.client.models.Tag
 
 import kotlinx.serialization.*
-import kotlinx.serialization.internal.CommonEnumSerializer
 
 /**
  *

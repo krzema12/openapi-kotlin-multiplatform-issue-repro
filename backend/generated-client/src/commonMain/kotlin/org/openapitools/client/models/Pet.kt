@@ -18,12 +18,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.CommonEnumSerializer
 
 /**
- * 
- * @param name 
- * @param photoUrls 
- * @param id 
- * @param category 
- * @param tags 
+ *
+ * @param name
+ * @param photoUrls
+ * @param id
+ * @param category
+ * @param tags
  * @param status pet status in the store
  */
 @Serializable

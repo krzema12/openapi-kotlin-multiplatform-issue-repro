@@ -16,10 +16,10 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.CommonEnumSerializer
 
 /**
- * 
- * @param code 
- * @param type 
- * @param message 
+ *
+ * @param code
+ * @param type
+ * @param message
  */
 @Serializable
 data class ApiResponse (

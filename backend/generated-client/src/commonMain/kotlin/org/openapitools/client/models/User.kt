@@ -16,14 +16,14 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.CommonEnumSerializer
 
 /**
- * 
- * @param id 
- * @param username 
- * @param firstName 
- * @param lastName 
- * @param email 
- * @param password 
- * @param phone 
+ *
+ * @param id
+ * @param username
+ * @param firstName
+ * @param lastName
+ * @param email
+ * @param password
+ * @param phone
  * @param userStatus User Status
  */
 @Serializable

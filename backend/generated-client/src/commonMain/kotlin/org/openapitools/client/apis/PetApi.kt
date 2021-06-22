@@ -40,8 +40,8 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Add a new pet to the store
-     * 
-     * @param body Pet object that needs to be added to the store 
+     *
+     * @param body Pet object that needs to be added to the store
      * @return void
      */
     suspend fun addPet(body: Pet): HttpResponse<Unit> {
@@ -72,8 +72,8 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Deletes a pet
-     * 
-     * @param petId Pet id to delete 
+     *
+     * @param petId Pet id to delete
      * @param apiKey  (optional)
      * @return void
      */
@@ -81,7 +81,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>("petstore_auth")
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -107,7 +107,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Finds Pets by status
      * Multiple status values can be provided with comma separated strings
-     * @param status Status values that need to be considered for filter 
+     * @param status Status values that need to be considered for filter
      * @return kotlin.collections.List<Pet>
      */
     @Suppress("UNCHECKED_CAST")
@@ -115,7 +115,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>("petstore_auth")
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -151,7 +151,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Finds Pets by tags
      * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-     * @param tags Tags to filter by 
+     * @param tags Tags to filter by
      * @return kotlin.collections.List<Pet>
      */
     @Suppress("UNCHECKED_CAST")
@@ -159,7 +159,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>("petstore_auth")
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -195,7 +195,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Find pet by ID
      * Returns a single pet
-     * @param petId ID of pet to return 
+     * @param petId ID of pet to return
      * @return Pet
      */
     @Suppress("UNCHECKED_CAST")
@@ -203,7 +203,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>("api_key")
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -227,8 +227,8 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Update an existing pet
-     * 
-     * @param body Pet object that needs to be added to the store 
+     *
+     * @param body Pet object that needs to be added to the store
      * @return void
      */
     suspend fun updatePet(body: Pet): HttpResponse<Unit> {
@@ -259,8 +259,8 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Updates a pet in the store with form data
-     * 
-     * @param petId ID of pet that needs to be updated 
+     *
+     * @param petId ID of pet that needs to be updated
      * @param name Updated name of the pet (optional)
      * @param status Updated status of the pet (optional)
      * @return void
@@ -269,7 +269,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>("petstore_auth")
 
-        val localVariableBody = 
+        val localVariableBody =
             ParametersBuilder().also {
                 name?.apply { it.append("name", name.toString()) }
                 status?.apply { it.append("status", status.toString()) }
@@ -296,8 +296,8 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * uploads an image
-     * 
-     * @param petId ID of pet to update 
+     *
+     * @param petId ID of pet to update
      * @param additionalMetadata Additional data to pass to server (optional)
      * @param file file to upload (optional)
      * @return ApiResponse
@@ -307,7 +307,7 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>("petstore_auth")
 
-        val localVariableBody = 
+        val localVariableBody =
             formData {
                 additionalMetadata?.apply { append("additionalMetadata", additionalMetadata) }
                 file?.apply { append("file", file) }
@@ -335,10 +335,10 @@ class PetApi @UseExperimental(UnstableDefault::class) constructor(
 
     companion object {
         internal fun setMappers(serializer: KotlinxSerializer) {
-            
+
             serializer.setMapper(FindPetsByStatusResponse::class, FindPetsByStatusResponse.serializer())
             serializer.setMapper(FindPetsByTagsResponse::class, FindPetsByTagsResponse.serializer())
-            
+
         }
     }
 }

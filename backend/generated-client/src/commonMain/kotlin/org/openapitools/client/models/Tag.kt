@@ -16,9 +16,9 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.CommonEnumSerializer
 
 /**
- * 
- * @param id 
- * @param name 
+ *
+ * @param id
+ * @param name
  */
 @Serializable
 data class Tag (

@@ -40,14 +40,14 @@ class StoreApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Delete purchase order by ID
      * For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
-     * @param orderId ID of the order that needs to be deleted 
+     * @param orderId ID of the order that needs to be deleted
      * @return void
      */
     suspend fun deleteOrder(orderId: kotlin.Long): HttpResponse<Unit> {
 
         val localVariableAuthNames = listOf<String>()
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -79,7 +79,7 @@ class StoreApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>("api_key")
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -114,7 +114,7 @@ class StoreApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Find purchase order by ID
      * For valid response try integer IDs with value &gt;&#x3D; 1 and &lt;&#x3D; 10. Other values will generated exceptions
-     * @param orderId ID of pet that needs to be fetched 
+     * @param orderId ID of pet that needs to be fetched
      * @return Order
      */
     @Suppress("UNCHECKED_CAST")
@@ -122,7 +122,7 @@ class StoreApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>()
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -146,8 +146,8 @@ class StoreApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Place an order for a pet
-     * 
-     * @param body order placed for purchasing the pet 
+     *
+     * @param body order placed for purchasing the pet
      * @return Order
      */
     @Suppress("UNCHECKED_CAST")
@@ -181,7 +181,7 @@ class StoreApi @UseExperimental(UnstableDefault::class) constructor(
     companion object {
         internal fun setMappers(serializer: KotlinxSerializer) {
             serializer.setMapper(GetInventoryResponse::class, GetInventoryResponse.serializer())
-            
+
         }
     }
 }

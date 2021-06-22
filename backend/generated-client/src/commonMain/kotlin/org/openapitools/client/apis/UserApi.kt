@@ -40,7 +40,7 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Create user
      * This can only be done by the logged in user.
-     * @param body Created user object 
+     * @param body Created user object
      * @return void
      */
     suspend fun createUser(body: User): HttpResponse<Unit> {
@@ -71,8 +71,8 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Creates list of users with given input array
-     * 
-     * @param body List of user object 
+     *
+     * @param body List of user object
      * @return void
      */
     suspend fun createUsersWithArrayInput(body: kotlin.collections.List<User>): HttpResponse<Unit> {
@@ -112,8 +112,8 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Creates list of users with given input array
-     * 
-     * @param body List of user object 
+     *
+     * @param body List of user object
      * @return void
      */
     suspend fun createUsersWithListInput(body: kotlin.collections.List<User>): HttpResponse<Unit> {
@@ -154,14 +154,14 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Delete user
      * This can only be done by the logged in user.
-     * @param username The name that needs to be deleted 
+     * @param username The name that needs to be deleted
      * @return void
      */
     suspend fun deleteUser(username: kotlin.String): HttpResponse<Unit> {
 
         val localVariableAuthNames = listOf<String>()
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -185,8 +185,8 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Get user by user name
-     * 
-     * @param username The name that needs to be fetched. Use user1 for testing.  
+     *
+     * @param username The name that needs to be fetched. Use user1 for testing.
      * @return User
      */
     @Suppress("UNCHECKED_CAST")
@@ -194,7 +194,7 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>()
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -218,9 +218,9 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Logs user into the system
-     * 
-     * @param username The user name for login 
-     * @param password The password for login in clear text 
+     *
+     * @param username The user name for login
+     * @param password The password for login in clear text
      * @return kotlin.String
      */
     @Suppress("UNCHECKED_CAST")
@@ -228,7 +228,7 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
         val localVariableAuthNames = listOf<String>()
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -254,14 +254,14 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
     /**
      * Logs out current logged in user session
-     * 
+     *
      * @return void
      */
     suspend fun logoutUser(): HttpResponse<Unit> {
 
         val localVariableAuthNames = listOf<String>()
 
-        val localVariableBody = 
+        val localVariableBody =
             io.ktor.client.utils.EmptyContent
 
         val localVariableQuery = mutableMapOf<String, List<String>>()
@@ -286,8 +286,8 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
     /**
      * Updated user
      * This can only be done by the logged in user.
-     * @param username name that need to be updated 
-     * @param body Updated user object 
+     * @param username name that need to be updated
+     * @param body Updated user object
      * @return void
      */
     suspend fun updateUser(username: kotlin.String, body: User): HttpResponse<Unit> {
@@ -319,10 +319,10 @@ class UserApi @UseExperimental(UnstableDefault::class) constructor(
 
     companion object {
         internal fun setMappers(serializer: KotlinxSerializer) {
-            
+
             serializer.setMapper(CreateUsersWithArrayInputRequest::class, CreateUsersWithArrayInputRequest.serializer())
             serializer.setMapper(CreateUsersWithListInputRequest::class, CreateUsersWithListInputRequest.serializer())
-            
+
         }
     }
 }

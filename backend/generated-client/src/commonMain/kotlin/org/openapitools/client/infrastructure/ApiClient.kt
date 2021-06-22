@@ -48,7 +48,7 @@ open class ApiClient(
     }
     private val authentications: kotlin.collections.Map<String, Authentication> by lazy {
         mapOf(
-                "api_key" to ApiKeyAuth("header", "api_key"), 
+                "api_key" to ApiKeyAuth("header", "api_key"),
                 "petstore_auth" to OAuth())
     }
 
@@ -56,13 +56,13 @@ open class ApiClient(
         protected val UNSAFE_HEADERS = listOf(HttpHeaders.ContentType)
 
         private fun setMappers(serializer: KotlinxSerializer) {
-            
+
             PetApi.setMappers(serializer)
-            
+
             StoreApi.setMappers(serializer)
-            
+
             UserApi.setMappers(serializer)
-            
+
             serializer.setMapper(org.openapitools.client.models.ApiResponse::class, org.openapitools.client.models.ApiResponse.serializer())
             serializer.setMapper(org.openapitools.client.models.Category::class, org.openapitools.client.models.Category.serializer())
             serializer.setMapper(org.openapitools.client.models.Order::class, org.openapitools.client.models.Order.serializer())

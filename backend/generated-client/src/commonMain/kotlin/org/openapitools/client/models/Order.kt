@@ -16,13 +16,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.CommonEnumSerializer
 
 /**
- * 
- * @param id 
- * @param petId 
- * @param quantity 
- * @param shipDate 
+ *
+ * @param id
+ * @param petId
+ * @param quantity
+ * @param shipDate
  * @param status Order Status
- * @param complete 
+ * @param complete
  */
 @Serializable
 data class Order (

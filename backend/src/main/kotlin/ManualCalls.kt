@@ -31,7 +31,4 @@ fun main(): Unit = runBlocking {
     println("Call 4")
     val order = storeApi.placeOrder(Order()).body()
     println(order)
-
-    val userApi = UserApi()
-    userApi.
 }

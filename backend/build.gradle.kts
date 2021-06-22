@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     // Core dependencies.
     application
@@ -47,35 +44,6 @@ dependencies {
     implementation(kotlin("reflect"))
 }
 
-fun JavaToolchainSpec.requiredJdk() {
-    languageVersion.set(JavaLanguageVersion.of(11))
-    vendor.set(JvmVendorSpec.ADOPTOPENJDK)
-}
-
-java {
-    toolchain {
-        requiredJdk()
-    }
-}
-
 application {
     mainClass.set("ExampleApplicationKt")
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf(
-            "-Xjsr305=strict"
-        )
-        jvmTarget = "11"
-        allWarningsAsErrors = true
-    }
-}
-
-val compiler = javaToolchains.compilerFor {
-    requiredJdk()
-}
-
-tasks.withType<KotlinJvmCompile>().configureEach {
-    kotlinOptions.jdkHome = compiler.get().metadata.installationPath.asFile.absolutePath
 }
